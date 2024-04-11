@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_positions",
+  "info": {
+    "singularName": "user-position",
+    "pluralName": "user-positions",
+    "displayName": "User Position",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "experience": {
+      "type": "integer"
+    },
+    "job_seeker": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "job_position": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-position.job-position"
+    }
+  }
+}

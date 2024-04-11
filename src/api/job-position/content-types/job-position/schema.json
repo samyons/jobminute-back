@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_positions",
+  "info": {
+    "singularName": "job-position",
+    "pluralName": "job-positions",
+    "displayName": "Job Position"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
