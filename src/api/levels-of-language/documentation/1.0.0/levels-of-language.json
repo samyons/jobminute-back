@@ -1,5 +1,5 @@
 {
-  "/user-languages": {
+  "/levels-of-languages": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLanguageListResponse"
+                "$ref": "#/components/schemas/LevelsOfLanguageListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "User-language"
+        "Levels-of-language"
       ],
       "parameters": [
         {
@@ -169,7 +169,7 @@
           }
         }
       ],
-      "operationId": "get/user-languages"
+      "operationId": "get/levels-of-languages"
     },
     "post": {
       "responses": {
@@ -178,7 +178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLanguageResponse"
+                "$ref": "#/components/schemas/LevelsOfLanguageResponse"
               }
             }
           }
@@ -235,23 +235,23 @@
         }
       },
       "tags": [
-        "User-language"
+        "Levels-of-language"
       ],
       "parameters": [],
-      "operationId": "post/user-languages",
+      "operationId": "post/levels-of-languages",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/UserLanguageRequest"
+              "$ref": "#/components/schemas/LevelsOfLanguageRequest"
             }
           }
         }
       }
     }
   },
-  "/user-languages/{id}": {
+  "/levels-of-languages/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -259,7 +259,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLanguageResponse"
+                "$ref": "#/components/schemas/LevelsOfLanguageResponse"
               }
             }
           }
@@ -316,7 +316,7 @@
         }
       },
       "tags": [
-        "User-language"
+        "Levels-of-language"
       ],
       "parameters": [
         {
@@ -330,7 +330,7 @@
           }
         }
       ],
-      "operationId": "get/user-languages/{id}"
+      "operationId": "get/levels-of-languages/{id}"
     },
     "put": {
       "responses": {
@@ -339,7 +339,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLanguageResponse"
+                "$ref": "#/components/schemas/LevelsOfLanguageResponse"
               }
             }
           }
@@ -396,7 +396,7 @@
         }
       },
       "tags": [
-        "User-language"
+        "Levels-of-language"
       ],
       "parameters": [
         {
@@ -410,13 +410,13 @@
           }
         }
       ],
-      "operationId": "put/user-languages/{id}",
+      "operationId": "put/levels-of-languages/{id}",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/UserLanguageRequest"
+              "$ref": "#/components/schemas/LevelsOfLanguageRequest"
             }
           }
         }
@@ -487,7 +487,7 @@
         }
       },
       "tags": [
-        "User-language"
+        "Levels-of-language"
       ],
       "parameters": [
         {
@@ -501,7 +501,7 @@
           }
         }
       ],
-      "operationId": "delete/user-languages/{id}"
+      "operationId": "delete/levels-of-languages/{id}"
     }
   }
 }

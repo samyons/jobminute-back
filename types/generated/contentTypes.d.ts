@@ -769,7 +769,10 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    firstName: Attribute.String;
+    firstName: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
     lastName: Attribute.String;
     work_experiences: Attribute.Relation<
       'plugin::users-permissions.user',
@@ -782,6 +785,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::education.education'
     >;
     onboardingCompleted: Attribute.Boolean & Attribute.DefaultTo<false>;
+    languages: Attribute.Component<'test.language', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -935,15 +939,15 @@ export interface ApiLanguageLanguage extends Schema.CollectionType {
     singularName: 'language';
     pluralName: 'languages';
     displayName: 'Language';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::language.language',
       'oneToOne',
@@ -959,40 +963,73 @@ export interface ApiLanguageLanguage extends Schema.CollectionType {
   };
 }
 
-export interface ApiUserLanguageUserLanguage extends Schema.CollectionType {
-  collectionName: 'user_languages';
+export interface ApiLanguageLevelLanguageLevel extends Schema.CollectionType {
+  collectionName: 'language_levels';
   info: {
-    singularName: 'user-language';
-    pluralName: 'user-languages';
-    displayName: 'User Language';
-    description: '';
+    singularName: 'language-level';
+    pluralName: 'language-levels';
+    displayName: 'LanguageLevel';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    level: Attribute.Integer & Attribute.Required;
-    job_seeker: Attribute.Relation<
-      'api::user-language.user-language',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    language: Attribute.Relation<
-      'api::user-language.user-language',
-      'oneToOne',
-      'api::language.language'
-    >;
+    name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::user-language.user-language',
+      'api::language-level.language-level',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::user-language.user-language',
+      'api::language-level.language-level',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLevelsOfLanguageLevelsOfLanguage
+  extends Schema.CollectionType {
+  collectionName: 'levels_of_languages';
+  info: {
+    singularName: 'levels-of-language';
+    pluralName: 'levels-of-languages';
+    displayName: 'LevelsOfLanguage';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    language: Attribute.Relation<
+      'api::levels-of-language.levels-of-language',
+      'oneToOne',
+      'api::language.language'
+    >;
+    language_level: Attribute.Relation<
+      'api::levels-of-language.levels-of-language',
+      'oneToOne',
+      'api::language-level.language-level'
+    >;
+    job_seeker: Attribute.Relation<
+      'api::levels-of-language.levels-of-language',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::levels-of-language.levels-of-language',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::levels-of-language.levels-of-language',
       'oneToOne',
       'admin::user'
     > &
@@ -1099,7 +1136,8 @@ declare module '@strapi/types' {
       'api::education.education': ApiEducationEducation;
       'api::job-position.job-position': ApiJobPositionJobPosition;
       'api::language.language': ApiLanguageLanguage;
-      'api::user-language.user-language': ApiUserLanguageUserLanguage;
+      'api::language-level.language-level': ApiLanguageLevelLanguageLevel;
+      'api::levels-of-language.levels-of-language': ApiLevelsOfLanguageLevelsOfLanguage;
       'api::user-position.user-position': ApiUserPositionUserPosition;
       'api::work-experience.work-experience': ApiWorkExperienceWorkExperience;
     }

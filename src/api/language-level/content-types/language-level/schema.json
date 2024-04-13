@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "language_levels",
+  "info": {
+    "singularName": "language-level",
+    "pluralName": "language-levels",
+    "displayName": "LanguageLevel"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

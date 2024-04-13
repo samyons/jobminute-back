@@ -67,7 +67,8 @@
     },
     "firstName": {
       "type": "string",
-      "required": false
+      "required": false,
+      "minLength": 3
     },
     "lastName": {
       "type": "string",
@@ -86,6 +87,11 @@
     "onboardingCompleted": {
       "type": "boolean",
       "default": false
+    },
+    "languages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "test.language"
     }
   }
 }
