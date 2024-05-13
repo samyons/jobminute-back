@@ -2,8 +2,12 @@ const { yup, validateYupSchema } = require('@strapi/utils');
 
 
 const completeOnboardingBodySchema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
+    personalInformation: yup.object().shape({
+      firstName: yup.string().required(),
+      lastName: yup.string().required(),
+      dateOfBirth: yup.date().required(),
+      gender: yup.string().oneOf(["Homme", "Femme"]).required(),
+    }),
   });
 
 module.exports = {

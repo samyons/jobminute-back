@@ -769,23 +769,17 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    firstName: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 3;
-      }>;
-    lastName: Attribute.String;
-    work_experiences: Attribute.Relation<
+    job_seeker: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToMany',
-      'api::work-experience.work-experience'
+      'oneToOne',
+      'api::job-seeker.job-seeker'
     >;
-    educations: Attribute.Relation<
+    company_user: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToMany',
-      'api::education.education'
+      'oneToOne',
+      'api::company-user.company-user'
     >;
-    onboardingCompleted: Attribute.Boolean & Attribute.DefaultTo<false>;
-    languages: Attribute.Component<'test.language', true>;
+    g: Attribute.Component<'test.language'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -796,6 +790,42 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::users-permissions.user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiActionAction extends Schema.CollectionType {
+  collectionName: 'actions';
+  info: {
+    singularName: 'action';
+    pluralName: 'actions';
+    displayName: 'Action';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    offer: Attribute.Relation<
+      'api::action.action',
+      'oneToOne',
+      'api::offer.offer'
+    >;
+    action: Attribute.Enumeration<['save', 'apply', 'ignore']> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::action.action',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::action.action',
       'oneToOne',
       'admin::user'
     > &
@@ -842,7 +872,7 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
@@ -851,9 +881,20 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
       'oneToOne',
       'api::activity-area.activity-area'
     >;
+    offers: Attribute.Relation<
+      'api::company.company',
+      'oneToMany',
+      'api::offer.offer'
+    >;
+    company_users: Attribute.Relation<
+      'api::company.company',
+      'oneToMany',
+      'api::company-user.company-user'
+    >;
+    description: Attribute.Text;
+    logo: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::company.company',
       'oneToOne',
@@ -869,15 +910,57 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
   };
 }
 
+export interface ApiCompanyUserCompanyUser extends Schema.CollectionType {
+  collectionName: 'company_users';
+  info: {
+    singularName: 'company-user';
+    pluralName: 'company-users';
+    displayName: 'Company User';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    company: Attribute.Relation<
+      'api::company-user.company-user',
+      'manyToOne',
+      'api::company.company'
+    >;
+    user: Attribute.Relation<
+      'api::company-user.company-user',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    firstName: Attribute.String;
+    lastName: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::company-user.company-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::company-user.company-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEducationEducation extends Schema.CollectionType {
   collectionName: 'educations';
   info: {
     singularName: 'education';
     pluralName: 'educations';
     displayName: 'Education';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     field: Attribute.String & Attribute.Required;
@@ -887,7 +970,6 @@ export interface ApiEducationEducation extends Schema.CollectionType {
     ended: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::education.education',
       'oneToOne',
@@ -926,6 +1008,59 @@ export interface ApiJobPositionJobPosition extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::job-position.job-position',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiJobSeekerJobSeeker extends Schema.CollectionType {
+  collectionName: 'job_seekers';
+  info: {
+    singularName: 'job-seeker';
+    pluralName: 'job-seekers';
+    displayName: 'Job Seeker';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    firstName: Attribute.String & Attribute.Required;
+    lastName: Attribute.String & Attribute.Required;
+    dateOfBirth: Attribute.Date;
+    gender: Attribute.Enumeration<['Homme', 'Femme']>;
+    user: Attribute.Relation<
+      'api::job-seeker.job-seeker',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    educations: Attribute.Relation<
+      'api::job-seeker.job-seeker',
+      'oneToMany',
+      'api::education.education'
+    >;
+    workExperiences: Attribute.Relation<
+      'api::job-seeker.job-seeker',
+      'oneToMany',
+      'api::work-experience.work-experience'
+    >;
+    job_position: Attribute.Relation<
+      'api::job-seeker.job-seeker',
+      'oneToOne',
+      'api::job-position.job-position'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::job-seeker.job-seeker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::job-seeker.job-seeker',
       'oneToOne',
       'admin::user'
     > &
@@ -993,43 +1128,75 @@ export interface ApiLanguageLevelLanguageLevel extends Schema.CollectionType {
   };
 }
 
-export interface ApiLevelsOfLanguageLevelsOfLanguage
-  extends Schema.CollectionType {
-  collectionName: 'levels_of_languages';
+export interface ApiOfferOffer extends Schema.CollectionType {
+  collectionName: 'offers';
   info: {
-    singularName: 'levels-of-language';
-    pluralName: 'levels-of-languages';
-    displayName: 'LevelsOfLanguage';
+    singularName: 'offer';
+    pluralName: 'offers';
+    displayName: 'Offer';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    language: Attribute.Relation<
-      'api::levels-of-language.levels-of-language',
+    localisation: Attribute.String;
+    description: Attribute.String;
+    job_position: Attribute.Relation<
+      'api::offer.offer',
       'oneToOne',
-      'api::language.language'
+      'api::job-position.job-position'
     >;
-    language_level: Attribute.Relation<
-      'api::levels-of-language.levels-of-language',
-      'oneToOne',
-      'api::language-level.language-level'
+    company: Attribute.Relation<
+      'api::offer.offer',
+      'manyToOne',
+      'api::company.company'
     >;
-    job_seeker: Attribute.Relation<
-      'api::levels-of-language.levels-of-language',
+    languages: Attribute.Component<'test.language', true>;
+    offer_type: Attribute.Relation<
+      'api::offer.offer',
       'oneToOne',
-      'plugin::users-permissions.user'
+      'api::offer-type.offer-type'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::levels-of-language.levels-of-language',
+      'api::offer.offer',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::levels-of-language.levels-of-language',
+      'api::offer.offer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOfferTypeOfferType extends Schema.CollectionType {
+  collectionName: 'offer_types';
+  info: {
+    singularName: 'offer-type';
+    pluralName: 'offer-types';
+    displayName: 'Offer Type';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::offer-type.offer-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::offer-type.offer-type',
       'oneToOne',
       'admin::user'
     > &
@@ -1087,17 +1254,16 @@ export interface ApiWorkExperienceWorkExperience extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     jobTitle: Attribute.String & Attribute.Required;
     companyName: Attribute.String & Attribute.Required;
     from: Attribute.Date & Attribute.Required;
     until: Attribute.Date;
-    ended: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    ended: Attribute.Boolean & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::work-experience.work-experience',
       'oneToOne',
@@ -1131,13 +1297,17 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::action.action': ApiActionAction;
       'api::activity-area.activity-area': ApiActivityAreaActivityArea;
       'api::company.company': ApiCompanyCompany;
+      'api::company-user.company-user': ApiCompanyUserCompanyUser;
       'api::education.education': ApiEducationEducation;
       'api::job-position.job-position': ApiJobPositionJobPosition;
+      'api::job-seeker.job-seeker': ApiJobSeekerJobSeeker;
       'api::language.language': ApiLanguageLanguage;
       'api::language-level.language-level': ApiLanguageLevelLanguageLevel;
-      'api::levels-of-language.levels-of-language': ApiLevelsOfLanguageLevelsOfLanguage;
+      'api::offer.offer': ApiOfferOffer;
+      'api::offer-type.offer-type': ApiOfferTypeOfferType;
       'api::user-position.user-position': ApiUserPositionUserPosition;
       'api::work-experience.work-experience': ApiWorkExperienceWorkExperience;
     }

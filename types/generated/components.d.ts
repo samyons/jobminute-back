@@ -4,6 +4,7 @@ export interface TestLanguage extends Schema.Component {
   collectionName: 'components_test_languages';
   info: {
     displayName: 'language';
+    description: '';
   };
   attributes: {
     language: Attribute.Relation<
@@ -11,7 +12,11 @@ export interface TestLanguage extends Schema.Component {
       'oneToOne',
       'api::language.language'
     >;
-    level: Attribute.Integer;
+    language_level: Attribute.Relation<
+      'test.language',
+      'oneToOne',
+      'api::language-level.language-level'
+    >;
   };
 }
 

@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "offer_types",
+  "info": {
+    "singularName": "offer-type",
+    "pluralName": "offer-types",
+    "displayName": "Offer Type"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

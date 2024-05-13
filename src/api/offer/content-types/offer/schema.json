@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "offers",
+  "info": {
+    "singularName": "offer",
+    "pluralName": "offers",
+    "displayName": "Offer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "localisation": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "job_position": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-position.job-position"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "offers"
+    },
+    "languages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "test.language"
+    },
+    "offer_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::offer-type.offer-type"
+    }
+  }
+}

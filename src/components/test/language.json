@@ -1,7 +1,8 @@
 {
   "collectionName": "components_test_languages",
   "info": {
-    "displayName": "language"
+    "displayName": "language",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -10,8 +11,10 @@
       "relation": "oneToOne",
       "target": "api::language.language"
     },
-    "level": {
-      "type": "integer"
+    "language_level": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::language-level.language-level"
     }
   }
 }

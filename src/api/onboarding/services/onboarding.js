@@ -9,31 +9,17 @@ const { forEach } = require("../../../../config/middlewares");
 module.exports = {
   completeOnboarding: async (ctx) => {
 
-    await strapi.entityService.update(
-        "plugin::users-permissions.user",
-        ctx.state.user.id,
-        {
-          data: {
-            onboardingCompleted: true,
-            firstName: ctx.request.body.firstName,
-            lastName: ctx.request.body.lastName,
-          }
+    return await strapi.entityService.create(
+      "api::job-seeker.job-seeker",
+      {
+        data: {
+          firstName: ctx.request.body.firstName,
+          lastName: ctx.request.body.lastName,
+          dateOfBirth: ctx.request.body.dateOfBirth,
+          gender: ctx.request.body.gender,
+          user: ctx.state.user.id,
         }
+      }
     );
-
-    console.log("cccc");
-
-    ctx.request.body.levelsOfLanguages.forEach(async element =>  {
-      await strapi.entityService.create(
-        "api::levels-of-language.levels-of-language",
-        {
-          data: {
-            language: element.language.id,
-            language_level: element.level.id,
-            job_seeker: ctx.state.user.id,
-          }
-        }
-      )
-    });     
   }
 }

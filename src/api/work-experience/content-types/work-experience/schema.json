@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -25,11 +25,11 @@
       "required": true
     },
     "until": {
-      "type": "date"
+      "type": "date",
+      "required": false
     },
     "ended": {
       "type": "boolean",
-      "default": false,
       "required": true
     }
   }

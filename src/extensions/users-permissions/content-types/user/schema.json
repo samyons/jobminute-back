@@ -65,32 +65,21 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "firstName": {
-      "type": "string",
-      "required": false,
-      "minLength": 3
-    },
-    "lastName": {
-      "type": "string",
-      "required": false
-    },
-    "work_experiences": {
+    "job_seeker": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::work-experience.work-experience"
+      "relation": "oneToOne",
+      "target": "api::job-seeker.job-seeker",
+      "mappedBy": "user"
     },
-    "educations": {
+    "company_user": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::education.education"
+      "relation": "oneToOne",
+      "target": "api::company-user.company-user",
+      "inversedBy": "user"
     },
-    "onboardingCompleted": {
-      "type": "boolean",
-      "default": false
-    },
-    "languages": {
+    "g": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "test.language"
     }
   }
