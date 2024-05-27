@@ -4,7 +4,7 @@
   "info": {
     "singularName": "language",
     "pluralName": "languages",
-    "displayName": "Language",
+    "displayName": "Langues",
     "description": ""
   },
   "options": {
@@ -14,7 +14,8 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     }
   }
 }

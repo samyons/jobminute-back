@@ -1,5 +1,5 @@
 {
-  "/user-positions": {
+  "/job-seeker-actions": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserPositionListResponse"
+                "$ref": "#/components/schemas/JobSeekerActionListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "User-position"
+        "Job-seeker-action"
       ],
       "parameters": [
         {
@@ -169,7 +169,7 @@
           }
         }
       ],
-      "operationId": "get/user-positions"
+      "operationId": "get/job-seeker-actions"
     },
     "post": {
       "responses": {
@@ -178,7 +178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserPositionResponse"
+                "$ref": "#/components/schemas/JobSeekerActionResponse"
               }
             }
           }
@@ -235,23 +235,23 @@
         }
       },
       "tags": [
-        "User-position"
+        "Job-seeker-action"
       ],
       "parameters": [],
-      "operationId": "post/user-positions",
+      "operationId": "post/job-seeker-actions",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/UserPositionRequest"
+              "$ref": "#/components/schemas/JobSeekerActionRequest"
             }
           }
         }
       }
     }
   },
-  "/user-positions/{id}": {
+  "/job-seeker-actions/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -259,7 +259,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserPositionResponse"
+                "$ref": "#/components/schemas/JobSeekerActionResponse"
               }
             }
           }
@@ -316,7 +316,7 @@
         }
       },
       "tags": [
-        "User-position"
+        "Job-seeker-action"
       ],
       "parameters": [
         {
@@ -330,7 +330,7 @@
           }
         }
       ],
-      "operationId": "get/user-positions/{id}"
+      "operationId": "get/job-seeker-actions/{id}"
     },
     "put": {
       "responses": {
@@ -339,7 +339,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserPositionResponse"
+                "$ref": "#/components/schemas/JobSeekerActionResponse"
               }
             }
           }
@@ -396,7 +396,7 @@
         }
       },
       "tags": [
-        "User-position"
+        "Job-seeker-action"
       ],
       "parameters": [
         {
@@ -410,13 +410,13 @@
           }
         }
       ],
-      "operationId": "put/user-positions/{id}",
+      "operationId": "put/job-seeker-actions/{id}",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/UserPositionRequest"
+              "$ref": "#/components/schemas/JobSeekerActionRequest"
             }
           }
         }
@@ -487,7 +487,7 @@
         }
       },
       "tags": [
-        "User-position"
+        "Job-seeker-action"
       ],
       "parameters": [
         {
@@ -501,7 +501,7 @@
           }
         }
       ],
-      "operationId": "delete/user-positions/{id}"
+      "operationId": "delete/job-seeker-actions/{id}"
     }
   }
 }

@@ -4,16 +4,18 @@
   "info": {
     "singularName": "job-position",
     "pluralName": "job-positions",
-    "displayName": "Job Position"
+    "displayName": "Postes d'emploi",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     }
   }
 }

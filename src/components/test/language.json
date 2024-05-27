@@ -10,11 +10,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::language.language"
-    },
-    "language_level": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::language-level.language-level"
     }
   }
 }

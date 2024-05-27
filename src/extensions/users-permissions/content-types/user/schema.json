@@ -6,7 +6,7 @@
     "description": "",
     "singularName": "user",
     "pluralName": "users",
-    "displayName": "User"
+    "displayName": "Utilisateurs"
   },
   "options": {
     "draftAndPublish": false
@@ -17,7 +17,7 @@
       "minLength": 3,
       "unique": true,
       "configurable": false,
-      "required": false
+      "required": true
     },
     "email": {
       "type": "email",
@@ -50,7 +50,7 @@
     },
     "confirmed": {
       "type": "boolean",
-      "default": false,
+      "default": true,
       "configurable": false
     },
     "blocked": {
@@ -63,24 +63,51 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
-      "configurable": false
+      "configurable": false,
+      "required": true
     },
-    "job_seeker": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "date"
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "Homme",
+        "Femme"
+      ]
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "users"
+    },
+    "educations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::education.education"
+    },
+    "work_experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-experience.work-experience"
+    },
+    "job_position": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::job-seeker.job-seeker",
-      "mappedBy": "user"
+      "target": "api::job-position.job-position"
     },
-    "company_user": {
+    "offres": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::company-user.company-user",
-      "inversedBy": "user"
-    },
-    "g": {
-      "type": "component",
-      "repeatable": false,
-      "component": "test.language"
+      "relation": "manyToMany",
+      "target": "api::offer.offer",
+      "inversedBy": "utilisateurs"
     }
   }
 }

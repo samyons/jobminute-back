@@ -15,11 +15,11 @@ module.exports = createCoreController('api::offer.offer', ({strapi}) => ({
         const response = await super.create(ctx);
         const id = ctx.state.user.id;
         const user = await strapi.entityService.findOne('plugin::users-permissions.user', id, 
-        {populate: ['company_user', 'company_user.company']
+        {populate: ['company']
 
         }); 
         // @ts-ignore
-        const updatedResponse = await strapi.entityService.update('api::offer.offer', response.data.id, {data: {company: user.company_user.company.id}});
+        const updatedResponse = await strapi.entityService.update('api::offer.offer', response.data.id, {data: {company: user.company.id}});
         return updatedResponse;
     },
 async find(ctx) {
@@ -27,12 +27,12 @@ async find(ctx) {
 
     const {id} = ctx.state.user;
     const user = await strapi.entityService.findOne('plugin::users-permissions.user', id, 
-    {populate: ['company_user', 'company_user.company']
+    {populate: ['company']
 
     });
 
     // @ts-ignore
-    if (user.company_user != null) {
+    if (user.company != null) {
        // const sanitizedQueryParams = await this.sanitizeQuery(ctx);
         const response = await strapi.entityService.findMany('api::offer.offer', { 
             // @ts-ignore
@@ -40,7 +40,7 @@ async find(ctx) {
             sort: 'createdAt:desc',
             filters: {
             // @ts-ignore
-            company: user.company_user.company.id}});
+            company: user.company.id}});
 
         const model = strapi.getModel('api::offer.offer');
         console.log(response);

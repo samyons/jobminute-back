@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "user_positions",
+  "collectionName": "job_seeker_actions",
   "info": {
-    "singularName": "user-position",
-    "pluralName": "user-positions",
-    "displayName": "User Position",
+    "singularName": "job-seeker-action",
+    "pluralName": "job-seeker-actions",
+    "displayName": "Job Seeker Action",
     "description": ""
   },
   "options": {
@@ -12,18 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "experience": {
-      "type": "integer"
-    },
-    "job_seeker": {
+    "user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "job_position": {
+    "offer": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::job-position.job-position"
+      "target": "api::offer.offer"
     }
   }
 }

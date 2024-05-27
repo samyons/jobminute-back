@@ -4,7 +4,8 @@
   "info": {
     "singularName": "offer-type",
     "pluralName": "offer-types",
-    "displayName": "Offer Type"
+    "displayName": "Types d'offre",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -12,7 +13,9 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

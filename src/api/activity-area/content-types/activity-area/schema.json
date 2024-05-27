@@ -4,15 +4,17 @@
   "info": {
     "singularName": "activity-area",
     "pluralName": "activity-areas",
-    "displayName": "Activity Area"
+    "displayName": "Domaines d'activité",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "name": {
       "type": "string",
+      "unique": true,
       "required": true
     }
   }

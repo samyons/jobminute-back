@@ -4,7 +4,7 @@
   "info": {
     "singularName": "company",
     "pluralName": "companies",
-    "displayName": "Company",
+    "displayName": "Entreprises",
     "description": ""
   },
   "options": {
@@ -16,35 +16,43 @@
       "type": "string",
       "required": true
     },
-    "activity_area": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::activity-area.activity-area"
-    },
     "offers": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::offer.offer",
       "mappedBy": "company"
     },
-    "company_users": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::company-user.company-user",
-      "mappedBy": "company"
-    },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "logo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "company"
+    },
+    "activity_area": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::activity-area.activity-area"
+    },
+    "pack": {
+      "type": "integer",
+      "required": true,
+      "max": 3,
+      "min": 1
     }
   }
 }

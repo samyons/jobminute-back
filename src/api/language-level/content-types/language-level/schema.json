@@ -4,15 +4,18 @@
   "info": {
     "singularName": "language-level",
     "pluralName": "language-levels",
-    "displayName": "LanguageLevel"
+    "displayName": "Niveaux de langue",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }
